@@ -13,12 +13,16 @@ const weatherSlice = createSlice({
   reducers: {
     setCurrentWeather: (state, action) => {
       state.currentWeather = action.payload;
+      state.loading = false;
+
     },
     setForecast: (state, action) => {
       state.forecast = action.payload;
     },
     setLoading: (state, action) => {
+
       state.loading = action.payload;
+      console.log(action.payload)
     },
     addFavorite: (state, action) => {
       state.favorites.push(action.payload);
@@ -37,19 +41,22 @@ const weatherSlice = createSlice({
 });
 
 export const {
-  setCurrentWeather,
-  setForecast,
-  setLoading,
-  addFavorite,
-  removeFavorite,
-  loadFavorites,
+    loadFavorites,
+//   setCurrentWeather,
+//   setForecast,
+  setLoading
+//   addFavorite,
+//   removeFavorite,
+//   loadFavorites,
 } = weatherSlice.actions;
 
 export const fetchWeatherData = (city) => async (dispatch) => {
   dispatch(setLoading(true));
+  let API_KEY='6f57d42d88ac2ccd583d200a45de620f'
   try {
-    const weatherResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=YOUR_API_KEY`);
-    const forecastResponse = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=YOUR_API_KEY`);
+    console.log(API_KEY)
+    const weatherResponse = await axios.get(`https://openweathermap.org/faq#error401=${city}&APPID=${API_KEY}`);
+    const forecastResponse = await axios.get(`https://openweathermap.org/faq#error401=${city}&APPID=${API_KEY}`);
     dispatch(setCurrentWeather(weatherResponse.data));
     dispatch(setForecast(forecastResponse.data.list));
   } catch (error) {
