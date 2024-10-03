@@ -1,4 +1,5 @@
-// src/redux/weatherSlice.js
+
+// export default weatherSlice.reducer;
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
@@ -14,15 +15,12 @@ const weatherSlice = createSlice({
     setCurrentWeather: (state, action) => {
       state.currentWeather = action.payload;
       state.loading = false;
-
     },
     setForecast: (state, action) => {
       state.forecast = action.payload;
     },
     setLoading: (state, action) => {
-
       state.loading = action.payload;
-      console.log(action.payload)
     },
     addFavorite: (state, action) => {
       state.favorites.push(action.payload);
@@ -41,29 +39,42 @@ const weatherSlice = createSlice({
 });
 
 export const {
-    loadFavorites,
-//   setCurrentWeather,
-//   setForecast,
-  setLoading
-//   addFavorite,
-//   removeFavorite,
-//   loadFavorites,
+  setCurrentWeather,
+  setForecast,
+  setLoading,
+  addFavorite,
+  removeFavorite,
+  loadFavorites,
 } = weatherSlice.actions;
 
+// Thunk to fetch weather data
 export const fetchWeatherData = (city) => async (dispatch) => {
   dispatch(setLoading(true));
-  let API_KEY='6f57d42d88ac2ccd583d200a45de620f'
+  const API_KEY = '6f57d42d88ac2ccd583d200a35de620f'; // Replace with your valid API key
+  const WEATHER_API_URL = `https://api.openweathermap.org/data/2.5/weather`;
+  const FORECAST_API_URL = `https://api.openweathermap.org/data/2.5/forecast`;
+
   try {
-    console.log(API_KEY)
-    const weatherResponse = await axios.get(`https://openweathermap.org/faq#error401=${city}&APPID=${API_KEY}`);
-    const forecastResponse = await axios.get(`https://openweathermap.org/faq#error401=${city}&APPID=${API_KEY}`);
+    // Fetch current weather data
+    const weatherResponse = await axios.get(`${WEATHER_API_URL}?q=${city}&appid=${API_KEY}`);
+    // Fetch forecast data
+    const forecastResponse = await axios.get(`${FORECAST_API_URL}?q=${city}&appid=${API_KEY}`);
+
+    // Dispatch actions to update the state with the data
     dispatch(setCurrentWeather(weatherResponse.data));
     dispatch(setForecast(forecastResponse.data.list));
   } catch (error) {
-    console.error("Error fetching weather data", error);
+    if (error.response) {
+      console.error("Error response from server:", error.response.data);
+    } else if (error.request) {
+      console.error("No response received:", error.request);
+    } else {
+      console.error("Error setting up request:", error.message);
+    }
   } finally {
     dispatch(setLoading(false));
   }
 };
 
+// Export the reducer as the default export
 export default weatherSlice.reducer;
