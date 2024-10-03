@@ -2,7 +2,7 @@
 
 import { configureStore } from '@reduxjs/toolkit';
 // import weatherReducer from './weatherSlice';
-// import favoritesReducer from './favoritesSlice'; // Import the favorites reducer
+ //import favoritesReducer from './favoritesSlice'; // Import the favorites reducer
 import weatherReducer from './weatherSlice';
 
 const store = configureStore({
@@ -12,7 +12,7 @@ const store = configureStore({
   },
 });
 
-// Load favorites function (renamed)
+// //Load favorites function (renamed)
 // const loadFavoritesFromStorage = () => {
 //     const favorites = JSON.parse(localStorage.getItem('favorites')) || []; // Load favorites from localStorage
 //     store.dispatch(loadFavoritesAction(favorites)); 
