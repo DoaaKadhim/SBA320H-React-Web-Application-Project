@@ -7,21 +7,6 @@ import SearchBar from './components/SearchBar'; // Add this if you have a Search
 import Forecast from './components/Forecast'; // Add this if you have a Forecast component
 
 const App = () => {
-  // useEffect(() => {
-  //   store.dispatch(loadFavorites());
-  // }, []);
-
-  // return (
-  //   <Provider store={store}>
-  //     <div className="App">
-  //       <h1>Weather Dashboard</h1>
-  //       <SearchBar /> {/* Assuming you have a search bar component */}
-  //       <WeatherDisplay />
-  //       <Favorites />
-  //       <Forecast /> {/* Assuming you have a forecast component */}
-  //     </div>
-  //   </Provider>
-  // );
   return (
     <Provider store={store}>
       <div className="App">
