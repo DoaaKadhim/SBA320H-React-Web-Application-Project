@@ -1,23 +1,24 @@
-// src/redux/store.js
 
+// store.js
 import { configureStore } from '@reduxjs/toolkit';
-// import weatherReducer from './weatherSlice';
- //import favoritesReducer from './favoritesSlice'; // Import the favorites reducer
 import weatherReducer from './weatherSlice';
+import favoritesReducer, { loadFavorites } from './favoritesSlice'; // Correctly import loadFavorites
 
 const store = configureStore({
   reducer: {
     weather: weatherReducer,
-    // favorites: favoritesReducer, // Add favorites reducer here
+    favorites: favoritesReducer,
   },
 });
 
-// //Load favorites function (renamed)
-// const loadFavoritesFromStorage = () => {
-//     const favorites = JSON.parse(localStorage.getItem('favorites')) || []; // Load favorites from localStorage
-//     store.dispatch(loadFavoritesAction(favorites)); 
-//  };
- 
+const loadFavoritesFromStorage = () => {
+  const savedFavorites = localStorage.getItem('favorites');
+  if (savedFavorites) {
+    const favorites = JSON.parse(savedFavorites);
+    store.dispatch(loadFavorites(favorites)); // Use loadFavorites to load data from storage
+  }
+};
 
-// export { loadFavorites };
+loadFavoritesFromStorage(); // Call the function to load favorites from localStorage
+
 export default store;
