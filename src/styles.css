@@ -116,3 +116,27 @@ button:focus {
   }
 }
 
+/* styles.css */
+h3 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+div {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin: 0.5rem 0;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+input {
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+}

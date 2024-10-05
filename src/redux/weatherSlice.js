@@ -133,9 +133,9 @@ export const {
 export const fetchWeatherData = (city) => async (dispatch) => {
   dispatch(setLoading(true));
   const API_KEY = '6f57d42d88ac2ccd583d200a35de620f'; // Replace with your valid API key
-    const WEATHER_API_URL = `https://api.openweathermap.org/data/2.5/weather`;
-    const FORECAST_API_URL = `https://api.openweathermap.org/data/2.5/forecast`;
-  
+  const WEATHER_API_URL = `https://api.openweathermap.org/data/2.5/weather`;
+  const FORECAST_API_URL = `https://api.openweathermap.org/data/2.5/forecast`;
+
   try {
     // Fetch current weather data
     const weatherResponse = await axios.get(`${WEATHER_API_URL}?q=${city}&appid=${API_KEY}`);
